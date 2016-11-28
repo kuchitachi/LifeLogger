@@ -13,6 +13,7 @@ public class ShowResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_result);
     }
 
+
     public void goMaps (View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);

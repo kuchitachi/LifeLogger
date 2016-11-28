@@ -21,6 +21,7 @@ public class RecordActivity extends AppCompatActivity {
         Button buttonStart = (Button)findViewById(R.id.buttonStart);
         Button buttonStop = (Button)findViewById(R.id.buttonStop);
 
+
         Button buttonSave = (Button)findViewById(R.id.buttonSave);
 
         final Chronometer chron = (Chronometer) findViewById(R.id.chron);
