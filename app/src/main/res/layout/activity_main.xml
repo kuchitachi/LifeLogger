@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.lifelogger.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Life Logger"
+        android:textSize="40sp"
+        android:layout_marginTop="80dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="기록하기"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="134dp"
+        android:id="@+id/record"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_width="130dp"
+        android:onClick="goRecord" />
+
+    <Button
+        android:text="기록확인"
+        android:layout_height="wrap_content"
+        android:id="@+id/results"
+        android:layout_alignTop="@+id/record"
+        android:layout_alignStart="@+id/record"
+        android:layout_marginTop="61dp"
+        android:layout_width="130dp"
+        android:textSize="20sp"
+        android:onClick="goResults"/>
+</RelativeLayout>

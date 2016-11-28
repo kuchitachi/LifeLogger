@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_record"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.lifelogger.RecordActivity"
+    android:elevation="0dp">
+
+    <TextView
+        android:text="기록하기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textColor="?android:attr/textColorLink" />
+
+    <Button
+        android:text="시작"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStart"
+        android:layout_alignTop="@+id/chron"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="정지"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStop"
+        android:layout_alignBaseline="@+id/chron"
+        android:layout_alignBottom="@+id/chron"
+        android:layout_alignParentEnd="true" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:id="@+id/chron"
+        android:elevation="15dp"
+        android:textSize="90sp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTitle"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:hint="제목입력" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editContents"
+        android:layout_height="150dp"
+        android:hint="내용입력"
+        android:gravity="top"
+        android:layout_below="@+id/editTitle"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:text="저장하기"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editContents"
+        android:layout_alignStart="@+id/buttonStop"
+        android:id="@+id/buttonSave" />
+</RelativeLayout>
