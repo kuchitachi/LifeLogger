@@ -1,8 +1,11 @@
 package com.example.lifelogger;
 
 import android.*;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,14 +18,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.Locale;
 
 public class RecordActivity extends AppCompatActivity implements LocationListener {
 
+    SQLiteDatabase db;
+    MySQLiteOpenHelper helper;
+
     long timeWhenStopped = 0; // chronometer에 기록된 시간 저장
     boolean statOfStartStop = false; // start나 stop버튼이 연속적으로 눌려졌을때 에러막기위한 변수
+
+    double latitude;
+    double longitude;
 
     private static final int go =3;
 
@@ -40,12 +50,10 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
+        helper = new MySQLiteOpenHelper(RecordActivity.this, "logs.db", null, 1); // DB 생성
+
         Button buttonStart = (Button)findViewById(R.id.buttonStart);
         Button buttonStop = (Button)findViewById(R.id.buttonStop);
-
-        TextView longi = (TextView)findViewById(R.id.longitude);
-        TextView lati = (TextView)findViewById(R.id.latitude);
-
 
         Button buttonSave = (Button)findViewById(R.id.buttonSave);
 
@@ -76,12 +84,8 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,0,this); // real time으로 받아오는거?
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
-
-        longi.setText(Integer.toString((int) latitude));
-        lati.setText(Integer.toString((int) longitude));
-            //테스트로 위치 보여주기
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
         buttonStart.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -108,5 +112,54 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
                 }
             }
         });
+
+        buttonSave.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+
+                EditText etTitle = (EditText)findViewById(R.id.editTitle);
+                EditText etContents = (EditText)findViewById(R.id.editContents);
+
+                String title = etTitle.getText().toString();
+                String contents = etContents.getText().toString();
+
+                long elapsedMillis = SystemClock.elapsedRealtime() - chron.getBase();
+                insert(latitude, longitude, elapsedMillis-1000, title, contents);
+                call();
+            }
+        });
+    }
+
+    // 위치, 한 시간, 제목, 내용
+    public void insert(double lati, double longi, long time, String title, String contents) {
+
+        db = helper.getWritableDatabase(); // DB 객체를 얻어온다. 쓰기 가능.
+
+        ContentValues values = new ContentValues();
+        // db.insert의 매개변수인 values가 ContentValues 변수이므로 그에 맞춤
+        // 데이터 삽입은 put을 사용해서 함
+        values.put("latitude", lati);
+        values.put("longitude", longi);
+        values.put("time", time);
+        values.put("title", title);
+        values.put("contents", contents);
+
+        db.insert("log", null, values); // 테이블/널컬럼핵/데이터
+    }
+
+    public void call() {
+
+        db = helper.getReadableDatabase();
+        Cursor c = db.query("log", null, null, null, null, null, null);
+
+        while (c.moveToNext()) {
+            int _id = c.getInt(c.getColumnIndex("_id"));
+            double latitude = c.getDouble(c.getColumnIndex("latitude"));
+            double longitude = c.getDouble(c.getColumnIndex("longitude"));
+            long time = c.getLong(c.getColumnIndex("time"));
+            String title = c.getString(c.getColumnIndex("title"));
+            String contents = c.getString(c.getColumnIndex("contents"));
+            Log.i("db", "id: "+ _id + ", title: " + title + ", latitude: " + latitude +", longitude: " + longitude + "\n" +
+            "time: " + time + ", contents: " + contents);
+        }
     }
 }
