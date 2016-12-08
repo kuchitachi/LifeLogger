@@ -21,15 +21,22 @@
         android:layout_alignParentStart="true"
         android:textColor="?android:attr/textColorLink" />
 
+
     <Button
         android:text="패턴분석하기"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="56dp"
         android:id="@+id/showMap"
-        android:onClick="goMaps" />
+        android:onClick="goMaps"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:id="@+id/lv_name_age"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_above="@+id/showMap"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

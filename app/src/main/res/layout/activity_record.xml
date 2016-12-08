@@ -76,7 +76,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editContents"
         android:layout_alignStart="@+id/buttonStop"
-        android:id="@+id/buttonSave"
-        android:onClick="sendContents"/>
+        android:id="@+id/buttonSave" />
 
 </RelativeLayout>
