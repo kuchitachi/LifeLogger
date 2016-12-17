@@ -22,28 +22,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     SQLiteDatabase db;
-    MySQLiteOpenHelper helper = new MySQLiteOpenHelper(this, "log002.db", null, 1);
+    MySQLiteOpenHelper helper = new MySQLiteOpenHelper(this, "log000003.db", null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -61,7 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         PolylineOptions options = new PolylineOptions().width(13).color(Color.MAGENTA).geodesic(true);
 
         while (c.moveToNext()) {
-            String _id = c.getString(c.getColumnIndex("_id"));
+            String _id = c.getString(c.getColumnIndex("title"));
 
             double latitude = c.getDouble(c.getColumnIndex("latitude"));
             double longitude = c.getDouble(c.getColumnIndex("longitude"));

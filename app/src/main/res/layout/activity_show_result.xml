@@ -11,17 +11,6 @@
     tools:context="com.example.lifelogger.ShowResultActivity">
 
 
-    <TextView
-        android:text="기록확인"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="30sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textColor="?android:attr/textColorLink" />
-
-
     <Button
         android:text="패턴분석하기"
         android:layout_width="wrap_content"
@@ -32,11 +21,12 @@
         android:layout_centerHorizontal="true" />
 
     <ListView
-        android:id="@+id/lv_name_age"
+        android:id="@+id/lv_result"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_above="@+id/showMap"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
 
 
 </RelativeLayout>

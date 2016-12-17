@@ -33,8 +33,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class RecordActivity extends AppCompatActivity implements LocationListener {
-    ListView lvProducts;
-    SimpleCursorAdapter simpleCursorAdapter;
 
     SQLiteDatabase db;
     MySQLiteOpenHelper helper;
@@ -48,8 +46,7 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
     private static final int go =3;
 
     public void onLocationChanged(Location location) {
-        // Called when a new location is found by the network location provider.
-        //Log.i("Message: ","Location changed, " + location.getAccuracy() + " , " + location.getLatitude()+ "," + location.getLongitude());
+
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -62,7 +59,7 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        helper = new MySQLiteOpenHelper(RecordActivity.this, "log002.db", null, 1); // DB 생성
+        helper = new MySQLiteOpenHelper(RecordActivity.this, "log000003.db", null, 1); // DB 생성
 
         Button buttonStart = (Button)findViewById(R.id.buttonStart);
         Button buttonStop = (Button)findViewById(R.id.buttonStop);
@@ -72,8 +69,6 @@ public class RecordActivity extends AppCompatActivity implements LocationListene
         final Chronometer chron = (Chronometer) findViewById(R.id.chron);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        lvProducts = (ListView) findViewById(R.id.lv_name_age);
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
